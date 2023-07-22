@@ -71,11 +71,11 @@ function game() {
     if (compScore > plrScore) {
         console.log(`Sorry the computer won with a score of ${compScore} to ${plrScore}`);
     }else if (compScore < plrScore) {
-        console.log(`BIG WINNER! You beat the computer ${plrScore} to ${compScore}.`)
+        console.log(`BIG WINNER! You beat the computer ${plrScore} to ${compScore}.`);
     }else {
-        console.log(`It's a tie?! Argh. You both won ${plrScore}.`)
-    }
-}
+        console.log(`It's a tie?! Argh. You both won ${plrScore}.`);
+    };
+};
 
 game()
 
