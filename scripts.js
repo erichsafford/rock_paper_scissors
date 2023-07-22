@@ -49,7 +49,6 @@ function playRound() {
 function game() {
     let compScore = 0;
     let plrScore = 0;
-    //let currentScore = `Current Score:\nPlayer: ${plrScore}\nComputer: ${compScore}`;
     for (let i = 0; i < 5; ++i){
         result = playRound();
         if (result[0] === 'win') {
@@ -64,9 +63,18 @@ function game() {
             console.log(`It's a tie! You both chose ${capitalizeFirstLetter(result[1])}`);
             console.log(`Current Score:\nPlayer: ${plrScore}\nComputer: ${compScore}`);
         };
-
-
     };
+
+
+
+
+    if (compScore > plrScore) {
+        console.log(`Sorry the computer won with a score of ${compScore} to ${plrScore}`);
+    }else if (compScore < plrScore) {
+        console.log(`BIG WINNER! You beat the computer ${plrScore} to ${compScore}.`)
+    }else {
+        console.log(`It's a tie?! Argh. You both won ${plrScore}.`)
+    }
 }
 
 game()
