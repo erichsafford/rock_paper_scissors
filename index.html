@@ -6,6 +6,24 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+    <div id="results-display">
+        
+    </div>
+
+    <div class="buttons">
+        <button onclick="game('rock')" id="rock-btn">ROCK</button>
+        <button onclick="game('paper')" id="paper-btn">PAPER</button>
+        <button onclick="game('scissors')" id="scissors-btn">SCISSORS</button>
+    </div>
+
+    <div class="plrScore-display">
+        <p id="plrScore-display">Your score: <span id="plrScore-live">0</span></p>
+
+    </div>
+    <div class="compScore-display">
+        <p id="compScore-display">Computer score: <span id="compScore-live">0</span></p>
+    </div>
+
     <script src="scripts.js">
         let compChoice = getComputerChoice();
         console.log(compChoice);

@@ -1,14 +1,29 @@
 const choices = ['rock', 'paper', 'scissors']
+let plrScore = 0
+let compScore = 0
+
+function updateScoreDisplay() {
+    const playerScoreElement = document.getElementById('plrScore-live');
+    const compScoreElement = document.getElementById('compScore-live');
+    if (playerScoreElement) {
+        playerScoreElement.textContent = plrScore;
+    };
+    if (compScoreElement) {
+        compScoreElement.textContent = compScore;
+    };
+}
+
+function resetGame() {    
+    plrScore = 0;
+    compScore = 0;
+    updateScoreDisplay()
+    //outcome = document.getElementById('outcomeOfGame');
+    //outcome.remove();
+}
 
 function getComputerChoice() {    
     let computerChoice = choices[Math.floor(Math.random() * choices.length)];
     return computerChoice;
-}
-
-function getPlayerChoice() {
-    let playerChoice = prompt("Choose 'Rock', 'Paper', or 'Scissors': ");
-    playerChoice = playerChoice.toLowerCase();
-    return playerChoice;
 }
 
 function capitalizeFirstLetter(str) {
@@ -39,45 +54,71 @@ function figureItOut(compChoice, plrChoice) {
     }
 }
 
-function playRound() {
+function playRound(plrChoice) {    
     let compChoice = getComputerChoice();
-    let plrChoice = getPlayerChoice();
     let result = figureItOut(compChoice, plrChoice);
     return [result, plrChoice, compChoice];
-}
+};
 
-function game() {
-    let compScore = 0;
-    let plrScore = 0;
-    for (let i = 0; i < 5; ++i){
-        result = playRound();
-        if (result[0] === 'win') {
-            console.log(`You win! ${capitalizeFirstLetter(result[1])} beats ${capitalizeFirstLetter(result[2])}`);
-            plrScore = plrScore + 1;
-            console.log(`Current Score:\nPlayer: ${plrScore}\nComputer: ${compScore}`);
-        } else if (result[0] === 'lose') {
-            console.log(`You lose! ${capitalizeFirstLetter(result[2])} beats ${capitalizeFirstLetter(result[1])}`);
-            compScore = compScore + 1;
-            console.log(`Current Score:\nPlayer: ${plrScore}\nComputer: ${compScore}`);
-        } else if (result[0] === 'tie') {
-            console.log(`It's a tie! You both chose ${capitalizeFirstLetter(result[1])}`);
-            console.log(`Current Score:\nPlayer: ${plrScore}\nComputer: ${compScore}`);
-        };
+function game(plrChoice) {
+    let result = playRound(plrChoice);
+    const prevResult = document.getElementById('results');
+    if (prevResult) {
+        prevResult.remove();
+    };
+    const prevOutcome = document.getElementById('outcomeOfGame')
+    if (prevOutcome) {
+        prevOutcome.remove();
+    }
+    
+    if (result[0] === 'win') {
+        const container = document.querySelector('#results-display');
+        const content = document.createElement('p');
+        content.setAttribute('id','results');
+        content.textContent = `You win! ${capitalizeFirstLetter(result[1])} beats ${capitalizeFirstLetter(result[2])}`;
+        container.appendChild(content);
+        plrScore = plrScore + 1;
+        updateScoreDisplay()
+        //console.log(`Current Score:\nPlayer: ${plrScore}\nComputer: ${compScore}`);
+    } else if (result[0] === 'lose') {
+        const container = document.querySelector('#results-display');
+        const content = document.createElement('p');
+        content.setAttribute('id','results');
+        content.textContent = `You lose! ${capitalizeFirstLetter(result[2])} beats ${capitalizeFirstLetter(result[1])}`;
+        container.appendChild(content);
+        compScore = compScore + 1;
+        updateScoreDisplay()
+        //console.log(`Current Score:\nPlayer: ${plrScore}\nComputer: ${compScore}`);
+    } else if (result[0] === 'tie') {
+        const container = document.querySelector('#results-display');
+        const content = document.createElement('p');
+        content.setAttribute('id','results');
+        content.textContent = `It's a tie! You both chose ${capitalizeFirstLetter(result[1])}`;
+        container.appendChild(content);
+        //console.log(`Current Score:\nPlayer: ${plrScore}\nComputer: ${compScore}`);
     };
 
-
-
-
-    if (compScore > plrScore) {
-        console.log(`Sorry the computer won with a score of ${compScore} to ${plrScore}`);
-    }else if (compScore < plrScore) {
-        console.log(`BIG WINNER! You beat the computer ${plrScore} to ${compScore}.`);
-    }else {
-        console.log(`It's a tie?! Argh. You both won ${plrScore}.`);
+    if (plrScore === 5 || compScore === 5) {
+        if (plrScore === 5) {
+            const container = document.querySelector('#results-display');
+            const content = document.createElement('h1');
+            content.setAttribute('id', 'outcomeOfGame')
+            content.textContent = "YOU WIN!";
+            container.appendChild(content);
+            resetGame();
+        } else {
+            const container = document.querySelector('#results-display');
+            const content = document.createElement('h1');
+            content.setAttribute('id', 'outcomeOfGame')
+            content.textContent = "YOU LOSE!";
+            container.appendChild(content);  
+            resetGame();          
+        };
     };
 };
 
-game()
+
+
 
 
 
