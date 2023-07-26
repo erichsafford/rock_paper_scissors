@@ -4,25 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
-    <div id="results-display">
-        
-    </div>
-
     <div class="buttons">
-        <button onclick="game('rock')" id="rock-btn">ROCK</button>
-        <button onclick="game('paper')" id="paper-btn">PAPER</button>
-        <button onclick="game('scissors')" id="scissors-btn">SCISSORS</button>
+        <img class="choice-icon" src="images/fist.png" alt="hand in fist position icon">
+        <button onclick="game('rock')" class="button" id="rock-btn">ROCK</button>
+        <img class="choice-icon" src="images/paper.png" alt="hand in paper position icon">
+        <button onclick="game('paper')" class="button" id="paper-btn">PAPER</button>
+        <img class="choice-icon" src="images/scissors.png" alt="hand in scissors position icon">
+        <button onclick="game('scissors')" class="button" id="scissors-btn">SCISSORS</button>
     </div>
 
-    <div class="plrScore-display">
-        <p id="plrScore-display">Your score: <span id="plrScore-live">0</span></p>
+    <div class="scoreboard">
+        <div class="plrScore-display">
+            <p id="plrScore-display">Your score: <span id="plrScore-live">0</span></p>
+        </div>
+        <div class="compScore-display">
+            <p id="compScore-display">Computer score: <span id="compScore-live">0</span></p>
+        </div>
+    </div>
 
-    </div>
-    <div class="compScore-display">
-        <p id="compScore-display">Computer score: <span id="compScore-live">0</span></p>
-    </div>
+    <div id="results-display"></div>
 
     <script src="scripts.js">
         let compChoice = getComputerChoice();
